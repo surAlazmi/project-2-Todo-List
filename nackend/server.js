@@ -5,6 +5,8 @@ const db =require('./db')
 const Todo=require('./todo')
 console.log(Todo)
 
+app.use(express.json())
+
 
 app .get('/',(req,res)=>{
 
@@ -26,6 +28,25 @@ app .get('/tasks',(req,res)=>{
      })
 })
 
+
+
+app .post('/tasks',(req,res)=>{
+    console.log("25:",req.body)
+
+    //Todo.creata({},(err,newTask)=>{
+
+
+       // if(err)
+       // {console.log('ERROR:',err)
+       //   }
+    
+   // else
+       // { res.status(201).json(newTask)
+
+
+        // }
+    // })
+})
 
 
 app.listen(5000,()=>{
