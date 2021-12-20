@@ -33,19 +33,19 @@ app .get('/tasks',(req,res)=>{
 app .post('/tasks',(req,res)=>{
     console.log("25:",req.body)
 
-    //Todo.creata({},(err,newTask)=>{
+    Todo.create(req.body,(err,newTask)=>{
 
 
-       // if(err)
-       // {console.log('ERROR:',err)
-       //   }
+        if(err)
+        {console.log('ERROR:',err)
+          }
     
-   // else
-       // { res.status(201).json(newTask)
+    else
+        { res.status(201).json(newTask)
 
 
-        // }
-    // })
+        }
+     })
 })
 
 
