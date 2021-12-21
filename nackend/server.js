@@ -16,6 +16,42 @@ app .get('/',(req,res)=>{
 
 //CRUD:creat ,delet ,read,update
 
+app.get('/completed',(req,res)=>{
+    Todo.find({isCompleted:true},(err,data)=>{
+
+        if(err){
+            console.log('err',err)
+
+        }
+        else{
+            console.log(data)
+            res.json(data)
+        }
+    })
+})
+
+
+app.get('/filter',(req,res)=>{
+    console.log(req.query)
+    Todo.find({isCompleted: req.query.isCompleted},(err,data)=>{
+
+       if(err){
+            console.log('err',err)
+
+       }
+        else{
+            //console.log(data)
+           res.json(data)
+        }
+    })
+})
+
+
+
+
+
+
+
 app .get('/tasks',(req,res)=>{
     Todo.find({},(err,data)=>{
 
