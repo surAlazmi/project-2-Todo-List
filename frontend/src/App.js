@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './App.css';
 import axios from 'axios'
 import Todo from './components/Todo'
+import Add from './components/Add';
+
 
 function App() {
 
@@ -29,7 +31,27 @@ getData()
    });
 
   }
-  const mapOverTasks=tasks.map((taskObj,i)=> (<Todo key={i} task={taskObj}/>))
+
+
+  const postNewTodo=(body)=>{
+    //console.log('func postNewTodo from APP')
+    
+      axios
+      .post( 'http://localhost:5000/tasks ',body)
+       .then((response) => {
+     //console.log('RESPONSE: ', response);
+        console.log('DATA: ', response.data);
+        setTasks(response.data)
+        getData()
+       })
+        .catch((err) => {
+        console.log ('ERR: ', err);
+     });
+
+
+  }
+  const mapOverTasks =tasks.map((taskObj,i)=> (
+  <Todo key={i} task={taskObj}/>))
      
   
 
@@ -40,6 +62,7 @@ getData()
     <div className="App">
       
         <p>App</p>
+        <Add createFunc={postNewTodo}></Add>
           <button onClick={getData}>GET TASKE</button>
 
           {mapOverTasks}
