@@ -4,6 +4,7 @@ const app =express()
 
 const db =require('./db')
 const Todo=require('./todo')
+const User=require('./user')
 console.log(Todo)
 
 app.use(express.json())
@@ -47,6 +48,71 @@ app.get('/filter',(req,res)=>{
         }
     })
 })
+
+
+//يرسل للداتابيس
+app .post('/user/register',(req,res)=>{
+    
+  
+      User.create(req.body,(err,newUser)=>{
+  
+  
+          if(err)
+          {console.log('ERROR:',err)
+          //يرجع رساله اذا الايميل موجود
+          res.status(201).json({message:'This email already taken'})
+            }
+      
+      else
+          { res.status(201).json( { message:"Create  new User Successfuly"})
+  
+  
+          }
+       })
+  })
+
+
+  app.post('/user/login',(req,res)=>{
+    User.find({email:req.body.email},(err,data)=>{
+
+        if(err)
+        {console.log('ERROR:',err)
+          }
+    
+        else
+        { console.log(data)
+//هذا اليزسر موجود رجع البنات
+          if(data.length===1){
+              if(req.body.password=== data[0].password){
+
+                   //pass is correct
+                res.status(200).json({ message:'Login Sussfuly', username: data[0].username,})
+              }
+              else
+              { //pass is incorrect//الرساله تروح على شكل اوبجكت
+                res.status(400).json({ message:'Wroning password',})
+                
+
+              }             
+          }
+          
+          else {
+              res.status(404).json({ message:'The Email entered is not regester',})
+          }
+          
+
+
+
+
+          //  res.json(data)
+
+
+         }
+     })
+})
+
+
+
 
 
 
