@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios'
 import Todo from './components/Todo'
 import Add from './components/Add';
+import Register from './components/Register'
 
 
 function App() {
@@ -101,10 +102,11 @@ getData()
     <div className="App">
       
         <p>App</p>
-        <Add createFunc={postNewTodo}></Add>
+        {/*<Add createFunc={postNewTodo}></Add>*/}
           <button onClick={getData}>GET TASKE</button>
 
-          {mapOverTasks}
+          {/*{mapOverTasks}*/}
+          <Register></Register>
 
 
 
